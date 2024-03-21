@@ -1,13 +1,3 @@
-
-
-
-/*~~~~~~~~~~~~~~~
- 	 Ep: Drosos 	 
- 	 On: Sotirios	 
- 	 AM: 2120234
- 	 AGM: 01864	 
-	~~~~~~~~~~~~~~~*/
-
 package Erg_1;
 
 import java.util.Scanner;
