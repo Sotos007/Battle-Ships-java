@@ -1,0 +1,12 @@
+# Project Requirements & Environment Specs
+
+# Runtime Environment
+Java Runtime Environment (JRE) >= 1.8
+Java Development Kit (JDK) >= 1.8
+
+# Standard Libraries (No external dependencies)
+- java.util.Scanner
+- java.util.Random
+
+# Compilation & Build
+- Compliance Level: Java SE 8 or higher
