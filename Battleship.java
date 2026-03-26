@@ -7,13 +7,13 @@ public class Battleship
 {
     public static void main(String[] args)
     {
-        int flag = 0; // Diktis o opois kathorizei ton termatismo h tin sinexeia tou paixnidiou.
+        int flag = 0; // Index that determines whether to terminate or continue the game.
         
-        mainMenu(); // Methodos h opoia emfanizei to kurio-arxiko menou tou paixnidioy.
+        mainMenu(); // Method that displays the main/initial game menu.
         
         while(flag != 1)
         {
-            // Arxikopoihsi tou basikoy pinaka array kai enos boithitikou sihps pou xrisimevei gia tin ylopoihsh tou paixnidiou.
+            // Initialization of the main grid array and an auxiliary ships array used for game logic.
             String[][] array = new String[10][10];
             String[][] ships = new String[10][10];
             
@@ -26,65 +26,65 @@ public class Battleship
                 }
             }
             
-            // Emfanisi tou basikoy pinaka pou apotelei kai to grafiko tou paixnidiou.
+            // Display the main board which constitutes the game's graphics.
             board(array);
             
-            // Methodos h opoia topothetei me tuxaia seira ta cruisers ston pinaka ships.
+            // Method that places cruisers in random positions on the ships grid.
             deployRandomCruisers(ships);
             
-            // Methodos h opoia topothetei me tuxaia seira ta patrols ston pinaka ships.
+            // Method that places patrols in random positions on the ships grid.
             deployRandomPatrols(ships); 
             
-            // Methodos h opoia tsekarei tis eikasies tou paixti kai epistrefei to katallilo apotelesma h minima.
+            // Method that checks player guesses and returns the appropriate result or message.
             PlayerGuess(ships, array);
             
             System.out.println("\n\nPlayer, do you want to continue the game Yes(0) or No(1)?");
             Scanner scan = new Scanner(System.in);
             flag = scan.nextInt(); 
             
-            // Elegxos gia orthi paraxorisi timis apo ton xristi.
+            // Check for valid user input.
             while(flag < 0 || flag > 1)
             {
                 System.out.println("Invalid number, try again:");
                 flag = scan.nextInt();
             }
             
-            // Tupwsi katallilou minimatos basi tis epilogis tou xristi.
+            // Print appropriate message based on user selection.
             if(flag == 1)
             {
                 System.out.println("\nExit...");
             }
             else
             {
-                System.out.println("  \nRight now, sea is empty!!\n");
+                System.out.println("  \nRight now, the sea is empty!!\n");
             }
             
         }
         
     }
 
-    static void mainMenu() // Methodos i opoia emfanizei to arxxiko menou tou paixnidou.
+    static void mainMenu() // Method that displays the initial game menu.
     {    
         System.out.println("+--------------------------------------------+");
         System.out.println("|      !!! Welcome to BattleShips game !!!    |");
         System.out.println("+--------------------------------------------+");
         
-        // Erwtisi pros ton xristi gia ton an gnorizei tous kanones tou paixnidiou.
+        // Ask the user if they know the game rules.
         System.out.println("\nPlayer, do you know the rules Yes(0) or No(1)?"); 
         
         int op = 0;
         Scanner scan = new Scanner(System.in);
         
-        // Epilogi timis-apantisis apo ton xristi.
+        // User selection for answer.
         op = scan.nextInt(); 
         
-        // Elegxos gia orthi paraxorisi timis apo ton xristi.
+        // Check for valid user input.
         while(op < 0 || op > 1)
         {
             System.out.println("Invalid number, try again:");
             op = scan.nextInt();
         }
-        // Emfanisi kanonwn tou paixnidiou se periptwsi opou o xristis den tous gnorizei.
+        // Display game rules if the user does not know them.
         if( op == 1) 
         {
             System.out.println("+--------------------------------------------+");
@@ -101,18 +101,18 @@ public class Battleship
             System.out.println("|   point and if a Cruiser sinks, earn two   |");
             System.out.println("|   extra points are earned.                 |");
             System.out.println("+--------------------------------------------+");
-            System.out.println(" \nLets start the game... Right now, sea is empty!!\n");
+            System.out.println(" \nLets start the game... Right now, the sea is empty!!\n");
         }
-        // Minima enarksis tou paixnidiou efoson o paixtis gnorizei tous kanones.
+        // Start message if the player already knows the rules.
         else 
         {
-            System.out.println("  \nLets start the game... Right now, sea is empty!!\n");
+            System.out.println("  \nLets start the game... Right now, the sea is empty!!\n");
         }
     }
     
-    static void board(String array[][]) // O pinakas pou apotelei kai to grafiko tou paixnidiou.
+    static void board(String array[][]) // The grid representing the game board graphics.
     {
-        System.out.println("   c   1   2   3   4   5   6   7   8   9");
+        System.out.println("    c   1   2   3   4   5   6   7   8   9");
         System.out.println(" r  +---+---+---+---+---+---+---+---+---+");
         for(int i=1; i<=9; i++) {
             System.out.print("  " + i + " | ");
@@ -124,17 +124,17 @@ public class Battleship
         System.out.println("\n\n");
     }
     
-    public static void deployRandomPatrols(String ships[][]) // H methodos i opoia pragmatopoiei tuxaia prosthiki patrols ston pinaka ships.
+    public static void deployRandomPatrols(String ships[][]) // Method that randomly adds patrols to the ships grid.
     {
         int r=0, c=0;
         Random rand = new Random();
         
         for(int i=0; i<3; i++)
         {
-            r = rand.nextInt(8) + 2; // Διασφάλιση ορίου
+            r = rand.nextInt(8) + 2; // Ensuring boundary safety
             c = rand.nextInt(8) + 2; 
 
-            // Χρήση .equals() αντί για ==
+            // Using .equals() for String comparison
             if("B".equals(ships[r][c]) && !"S".equals(ships[r][c+1]) && !"S".equals(ships[r][c-1]) && !"S".equals(ships[r+1][c]) && !"S".equals(ships[r-1][c]))
             {
                 ships[r][c] = "S";
@@ -158,7 +158,7 @@ public class Battleship
         }
     }
     
-    public static void deployRandomCruisers(String ships[][]) // H methodos i opoia pragmatopoiei tuxaia prosthiki cruisers ston pinaka ships.
+    public static void deployRandomCruisers(String ships[][]) // Method that randomly adds cruisers to the ships grid.
     {
         int r=0, c=0;
         Random rand = new Random();
@@ -168,7 +168,7 @@ public class Battleship
             r = rand.nextInt(7) + 3;
             c = rand.nextInt(7) + 3;
             
-            // Χρήση .equals() για ασφαλή σύγκριση Strings
+            // Using .equals() for safe String comparison
             if("B".equals(ships[r][c]) && !"S".equals(ships[r][c+2]) && !"S".equals(ships[r][c-1]) && !"S".equals(ships[r+2][c]) && !"S".equals(ships[r-1][c]) && !"S".equals(ships[r-1][c-1]) && !"S".equals(ships[r+1][c+1]) && !"S".equals(ships[r+1][c-1]) && !"S".equals(ships[r-1][c+1]))
             {
                 ships[r][c] = "S";
@@ -197,7 +197,7 @@ public class Battleship
         }
     }
     
-    public static void PlayerGuess(String ships[][], String array[][]) // Methodos h opoia tsekarei tis eikasies tou paixti kai epistrefei to katallilo apotelesma h minima.
+    public static void PlayerGuess(String ships[][], String array[][]) // Method that checks player guesses and returns results.
     {
         int r=0, c=0; 
         int[] target = new int [10]; 
@@ -233,7 +233,7 @@ public class Battleship
             {
                 if(target[i] == target[j] && i != j)
                 {
-                    System.out.println("These cord already used, try again:");
+                    System.out.println("These coordinates are already used, try again:");
                     guess = scan.nextInt();
                     r = guess / 10;
                     c = guess % 10;
@@ -241,12 +241,12 @@ public class Battleship
                 }
             }
             
-            // Σύγκριση με .equals()
+            // Check Hit or Miss using .equals()
             if("B".equals(ships[r][c]))
             {
                 array[r][c] = "M";
                 ships[r][c] = "M";
-                System.out.println("You miss it!!");
+                System.out.println("You missed it!!");
                 sm = sm + 1;
             }
             else if("S".equals(ships[r][c]))
@@ -259,7 +259,7 @@ public class Battleship
             board(array);        
         }
 
-        // Υπολογισμός Cruiser points με .equals()
+        // Calculate Cruiser points
         for(int i=1; i<9; i++ )
         {
             for(int j=1; j<9; j++ )
@@ -269,20 +269,20 @@ public class Battleship
             }
         }
         
-        // Fixed positions check με .equals()
+        // Fixed positions boundary check
         if("H".equals(ships[1][1]) && "H".equals(ships[1][2])) { spc += 2; }
         if("H".equals(ships[9][1]) && "H".equals(ships[9][2])) { spc += 2; }
         if("H".equals(ships[9][9]) && "H".equals(ships[9][8])) { spc += 2; }
         if("H".equals(ships[1][9]) && "H".equals(ships[1][8])) { spc += 2; }
         
-        // Υπολογισμός Patrol points με .equals()
+        // Calculate Patrol points
         for(int i=1; i<9; i++ )
         {
             for(int j=1; j<9; j++ )
             {
                 if("H".equals(ships[i][j]))
                 {
-                    // Έλεγχος αν είναι μεμονωμένο hit (Patrol)
+                    // Check if hit is isolated (Patrol)
                     if(!("H".equals(ships[i+1][j])) && !("H".equals(ships[i][j+1])) && !("H".equals(ships[i][j-1])) && !("H".equals(ships[i-1][j])))
                     {    
                         spp = spp + 1;
@@ -310,28 +310,28 @@ public class Battleship
             if(op == 1)
             {
                 System.out.println("\nThe sum of correct tries is: " + (10-sm));
-                System.out.println("\nPlayer, give an other answer:");
+                System.out.println("\nPlayer, give another answer:");
             }
             if(op == 2)
             {
-                System.out.println("\nThe sum points of sunked patrols are: " + spp );
-                System.out.println("You sunked " + spp  +" patrols.");
-                System.out.println("\nGive an other answer:");
+                System.out.println("\nThe total points from sunken patrols: " + spp );
+                System.out.println("You sank " + spp  +" patrols.");
+                System.out.println("\nGive another answer:");
             }
             if(op == 3)
             {
-                System.out.println("\nThe sum points of sunked cruisers are: " + spc  );
-                System.out.println("You sunked " + spc/2 +" cruisers." );
-                System.out.println("\nGive an other answer:");
+                System.out.println("\nThe total points from sunken cruisers: " + spc  );
+                System.out.println("You sank " + spc/2 +" cruisers." );
+                System.out.println("\nGive another answer:");
             }
             if(op == 4)
             {
-                System.out.println("\nThe total points of sunked patrols and cruisers are: " + (spc+ spp ) );
-                System.out.println("\nGive an other answer:");
+                System.out.println("\nThe total points from sunken patrols and cruisers: " + (spc+ spp ) );
+                System.out.println("\nGive another answer:");
             }
             if(op == 0)
             {
-                System.out.println("\nExit of results menu. ");
+                System.out.println("\nExiting the results menu. ");
                 resFlag = 0;
             }
         }
@@ -340,17 +340,17 @@ public class Battleship
     public static void opMenu() 
     {
         System.out.println("+--------------------------------------------+");
-        System.out.println("| ~If you want see the sum of correct tries  |");
-        System.out.println("|   press (1)                                |");
-        System.out.println("| ~If you want see the sum points of sunked  |");
-        System.out.println("|   patroles press (2).                      |");
-        System.out.println("| ~If you want see the sum points of sunked  |");
+        System.out.println("| ~If you want to see the sum of correct     |");
+        System.out.println("|   tries press (1)                          |");
+        System.out.println("| ~If you want to see the points for sunken  |");
+        System.out.println("|   patrols press (2).                       |");
+        System.out.println("| ~If you want to see the points for sunken  |");
         System.out.println("|   cruisers press (3).                      |");
-        System.out.println("| ~If you want see the total points of sunked|");
-        System.out.println("|   cruisers and patroles press (4).         |");
-        System.out.println("| ~If you do not want see the results        |");
+        System.out.println("| ~If you want to see the total points for   |");
+        System.out.println("|   all ships press (4).                     |");
+        System.out.println("| ~If you do not want to see results         |");
         System.out.println("|   press (0)                                |");
         System.out.println("+--------------------------------------------+");
-        System.out.println("Player, give your answer:");
+        System.out.println("Player, give your choice:");
     }
 }
